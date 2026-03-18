@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+			integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="css/style.css" />
+		<title>ChatZone App</title>
+	</head>
+	<body>
+		<div class="join-container">
+			<header class="join-header">
+				<h1>ChatZone</h1>
+			</header>
+			<main class="join-main">
+				<form class="control" action="chat.html">
+					<div class="form-control">
+						<label for="username">Nom utilisateur</label>
+						<input
+							type="text"
+							name="username"
+							id="username"
+							placeholder="Votre nom"
+							required
+						/>
+					</div>
+					<div class="form-control">
+						<label for="room">Room</label>
+						<input
+							type="text"
+							name="room"
+							id="room"
+							placeholder="Le room a joindre"
+							required
+						/>
+					</div>
+					<button type="submit" class="bouton">Joindre</button>
+					<div class="zen">
+						<p class="modeZen">Passer en mode Zen</p>
+						<button type="button" class="toggle-button">
+						<i class="fas fa-moon"></i>
+					</button>
+					</div>
+				</form>
+			</main>
+		</div>
+		<script src="./js/script.js"></script>
+	</body>
+</html>

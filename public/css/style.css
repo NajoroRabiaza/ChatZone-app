@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	background: url(../image/AltoLight.png);
+	background-position: center;
+    background-size: cover;
+	margin: 20px;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+
+.bouton {
+	cursor: pointer;
+	padding: 10px 5px;
+	background: rgb(67, 129, 147);
+	color: white;
+	border-radius: 5px 5px 10px 10px;
+	border: 1px solid rgb(80, 58, 68);
+	font-size: 25px;
+}
+
+
+
+/* Join Page */
+.join-container {
+	width: 500px;
+	margin: 80px auto;
+	color: rgb(80, 58, 68);
+}
+
+.join-header {
+	text-align: center;
+	color: rgb(183, 219, 325);
+	padding: 28px;
+	background-color: rgb(80, 58, 68);
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+}
+
+.join-main {
+	padding: 30px 60px;
+	background: transparent;
+    backdrop-filter: blur(17px);
+	border: 2px solid rgb(80, 58, 68);
+    border-radius: 0px 0px 20px 20px;
+}
+
+.join-main p {
+	margin-bottom: 20px;
+}
+
+.join-main .form-control {
+	margin-bottom: 20px;
+}
+
+.join-main label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.join-main input[type='text'] {
+	font-size: 16px;
+	padding: 5px;
+	height: 40px;
+	width: 100%;
+}
+
+.control{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.join-main select {
+	font-size: 16px;
+	padding: 5px;
+	height: 40px;
+	width: 100%;
+}
+
+.join-main .bouton {
+	margin-top: 20px;
+	width: 60%;
+}
+
+@media (max-width: 700px) {
+	.chat-main {
+		display: block;
+	}
+
+	.chat-sidebar {
+		display: none;
+	}
+}
+
+/*  switch bouton light dark mode */
+
+.toggle-button {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	font-size: 25px;
+	display: flex;
+	align-items: end;
+	padding-bottom: 16px;
+}
+
+
+
+body.dark-mode {
+	background: url(../image/AltoDark.jpeg); /* Image de fond alternative pour le mode sombre */
+	transition: 1s;
+}
+
+body.dark-mode .join-header {
+	background-color: rgb(120, 47, 88); /* Couleur de fond alternative pour le mode sombre */
+	color: #ffffff; /* Couleur du texte alternative pour le mode sombre */
+	transition: 1s;
+}
+body.dark-mode .join-main {
+	border-color: #3a3a3a; /* Couleur de bordure alternative pour le mode sombre */
+}
+
+body.dark-mode .bouton {
+	background-color: rgb(40, 16, 36); /* Couleur de fond alternative pour le mode sombre */
+	border-color: #000000; /* Couleur de bordure alternative pour le mode sombre */
+	color: #ffffff; /* Couleur du texte alternative pour le mode sombre */
+	transition: 1s;
+}
+
+body.dark-mode .zen {
+	color: white;
+	transition: 1s;
+}
+
+body.dark-mode .toggle-button {
+	color: white;
+	transition: 1s;
+}
+
+.zen{
+	display: flex;
+	flex-direction: row;
+}
+
+.modeZen{
+	padding-top: 40px;
+}
+
+body.dark-mode .join-main input[type='text'] {
+	background-color: rgb(182, 140, 169);
+	transition: 1s;
+}
