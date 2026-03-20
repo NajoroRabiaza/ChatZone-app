@@ -4,7 +4,7 @@
   "description": "Real time chat by najoro & toavina",
   "main": "public/server.js",
   "scripts": {
-    "start": "node server",
+    "start": "node public/server.js",
     "dev": "nodemon server"
   },
   "author": "incognito",
