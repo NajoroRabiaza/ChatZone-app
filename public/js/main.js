@@ -5,7 +5,11 @@ const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 const fileInput = document.getElementById('file-input');
 const fileBtn = document.getElementById('file-btn');
+const micBtn = document.getElementById('mic-btn');
 var notificationSound = document.getElementById('notification-sound');
+
+let mediaRecorder = null;
+let audioChunks = [];
 
 //get username and room from URL
 const { username, room } = Qs.parse(location.search, {
@@ -72,6 +76,51 @@ socket.on('fileMessage', message => {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
+// Enregistrement audio
+micBtn.addEventListener('click', async () => {
+    if (mediaRecorder && mediaRecorder.state === 'recording') {
+        // Arrêter l'enregistrement
+        mediaRecorder.stop();
+        micBtn.classList.remove('recording');
+        micBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+        micBtn.title = 'Enregistrer un audio';
+        return;
+    }
+
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        audioChunks = [];
+        mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.addEventListener('dataavailable', e => {
+            audioChunks.push(e.data);
+        });
+
+        mediaRecorder.addEventListener('stop', () => {
+            const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+            stream.getTracks().forEach(t => t.stop());
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                socket.emit('chatFile', {
+                    name: `audio_${Date.now()}.webm`,
+                    data: e.target.result,
+                    type: 'audio/webm'
+                });
+            };
+            reader.readAsDataURL(audioBlob);
+        });
+
+        mediaRecorder.start();
+        micBtn.classList.add('recording');
+        micBtn.innerHTML = '<i class="fas fa-stop"></i>';
+        micBtn.title = 'Arrêter et envoyer';
+
+    } catch (err) {
+        alert('Microphone inaccessible. Vérifie les permissions.');
+    }
+});
+
 // Message submit
 chatForm.addEventListener('submit', (e) =>{
     e.preventDefault();
@@ -104,11 +153,14 @@ function outputFileMessage(message) {
     const div = document.createElement('div');
     div.classList.add('message');
     const isImage = message.fileType && message.fileType.startsWith('image/');
+    const isAudio = message.fileType && message.fileType.startsWith('audio/');
     div.innerHTML = `<p class="meta">${message.username} <span>${message.time}</span></p>
     <div class="file-content">
         ${isImage
             ? `<img src="${message.data}" alt="${message.fileName}" class="chat-image" />`
-            : `<a href="${message.data}" download="${message.fileName}" class="file-download">📎 ${message.fileName}</a>`
+            : isAudio
+                ? `<audio controls src="${message.data}" class="chat-audio"></audio>`
+                : `<a href="${message.data}" download="${message.fileName}" class="file-download">📎 ${message.fileName}</a>`
         }
     </div>`;
     document.querySelector('.chat-messages').appendChild(div);
