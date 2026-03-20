@@ -5,7 +5,7 @@
   "main": "public/server.js",
   "scripts": {
     "start": "node public/server.js",
-    "dev": "nodemon server"
+    "dev": "nodemon public/server.js"
   },
   "author": "incognito",
   "license": "MIT",

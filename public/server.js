@@ -51,8 +51,19 @@ io.on('connection', socket => {
     //listen for chatMessage
     socket.on('chatMessage', msg =>{
         const user = getCurrentUser(socket.id);
-
         io.to(user.room).emit('message', formatMessage(user.username, msg));
+    });
+
+    //listen for chatFile
+    socket.on('chatFile', ({ name, data, type }) => {
+        const user = getCurrentUser(socket.id);
+        io.to(user.room).emit('fileMessage', {
+            username: user.username,
+            fileName: name,
+            data: data,
+            fileType: type,
+            time: require('moment')().format('h:mm a')
+        });
     });
      //runs when client disconnect
      socket.on('disconnect', () => {
@@ -80,7 +91,7 @@ io.on('connection', socket => {
     });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT =process.env.PORT || 3001;
 
 server.listen(PORT , () => console.log(`Server running on port ${PORT}`));
 

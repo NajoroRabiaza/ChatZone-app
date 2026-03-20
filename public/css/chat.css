@@ -140,6 +140,55 @@ a {
 
 .chat-form-container form {
 	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.btn-file {
+	cursor: pointer;
+	padding: 5px 12px;
+	background: var(--light-color);
+	color: rgb(80, 58, 68);
+	border: 0;
+	font-size: 17px;
+	border-radius: 20px 9px 9px 20px;
+	height: 40px;
+	flex-shrink: 0;
+}
+
+.btn-file:hover {
+	background: #cdd2ff;
+}
+
+.chat-image {
+	max-width: 100%;
+	max-height: 300px;
+	border-radius: 6px;
+	display: block;
+	margin-top: 5px;
+	cursor: pointer;
+}
+
+.file-download {
+	display: inline-block;
+	margin-top: 5px;
+	padding: 6px 12px;
+	background: var(--light-color);
+	color: rgb(80, 58, 68);
+	border-radius: 5px;
+	font-weight: bold;
+}
+
+body.dark-mode .btn-file {
+	background-color: rgb(182, 140, 169);
+	color: black;
+	font-weight: 900;
+	transition: 1s;
+}
+
+body.dark-mode .file-download {
+	background-color: rgb(182, 140, 169);
+	color: black;
 }
 
 .chat-form-container input[type='text'] {

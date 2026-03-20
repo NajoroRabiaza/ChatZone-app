@@ -3,6 +3,8 @@ const chatMessages = document.querySelector('.chat-messages');
 const chatSidebar = document.querySelector('.chat-sidebar');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
+const fileInput = document.getElementById('file-input');
+const fileBtn = document.getElementById('file-btn');
 var notificationSound = document.getElementById('notification-sound');
 
 //get username and room from URL
@@ -36,6 +38,40 @@ socket.on('message', message => {
 
 });
 
+// Ouvrir le sélecteur de fichier
+fileBtn.addEventListener('click', () => fileInput.click());
+
+// Envoi fichier
+fileInput.addEventListener('change', () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const MAX_SIZE = 5 * 1024 * 1024; // 5 MB
+    if (file.size > MAX_SIZE) {
+        alert('Fichier trop grand (max 5 MB)');
+        fileInput.value = '';
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        socket.emit('chatFile', {
+            name: file.name,
+            data: e.target.result,
+            type: file.type
+        });
+    };
+    reader.readAsDataURL(file);
+    fileInput.value = '';
+});
+
+// Réception fichier
+socket.on('fileMessage', message => {
+    outputFileMessage(message);
+    notificationSound.play();
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+
 // Message submit
 chatForm.addEventListener('submit', (e) =>{
     e.preventDefault();
@@ -60,6 +96,21 @@ function outputMessage(message) {
     <p class="text">
         ${message.text}
     </p>`;
+    document.querySelector('.chat-messages').appendChild(div);
+}
+
+//output file message to DOM
+function outputFileMessage(message) {
+    const div = document.createElement('div');
+    div.classList.add('message');
+    const isImage = message.fileType && message.fileType.startsWith('image/');
+    div.innerHTML = `<p class="meta">${message.username} <span>${message.time}</span></p>
+    <div class="file-content">
+        ${isImage
+            ? `<img src="${message.data}" alt="${message.fileName}" class="chat-image" />`
+            : `<a href="${message.data}" download="${message.fileName}" class="file-download">📎 ${message.fileName}</a>`
+        }
+    </div>`;
     document.querySelector('.chat-messages').appendChild(div);
 }
 
