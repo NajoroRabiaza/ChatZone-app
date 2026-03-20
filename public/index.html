@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,42 +14,70 @@
 		<title>ChatZone App</title>
 	</head>
 	<body>
-		<div class="join-container">
-			<header class="join-header">
-				<h1>ChatZone</h1>
-			</header>
-			<main class="join-main">
-				<form class="control" action="chat.html">
-					<div class="form-control">
-						<label for="username">Nom utilisateur</label>
-						<input
-							type="text"
-							name="username"
-							id="username"
-							placeholder="Votre nom"
-							required
-						/>
+
+		<!-- SECTION HERO -->
+		<section class="hero">
+			<div class="hero-content">
+				<h1 class="hero-title">ChatZone</h1>
+				<p class="hero-subtitle">Chat en temps réel, sans inscription.<br>Rejoins un room et discute instantanément.</p>
+				<div class="hero-features">
+					<div class="feature">
+						<i class="fas fa-bolt"></i>
+						<span>Instantané</span>
 					</div>
-					<div class="form-control">
-						<label for="room">Room</label>
-						<input
-							type="text"
-							name="room"
-							id="room"
-							placeholder="Le room a joindre"
-							required
-						/>
+					<div class="feature">
+						<i class="fas fa-users"></i>
+						<span>Multi-rooms</span>
 					</div>
-					<button type="submit" class="bouton">Joindre</button>
-					<div class="zen">
-						<p class="modeZen">Passer en mode Zen</p>
-						<button type="button" class="toggle-button">
-						<i class="fas fa-moon"></i>
-					</button>
+					<div class="feature">
+						<i class="fas fa-user-secret"></i>
+						<span>Sans compte</span>
 					</div>
-				</form>
-			</main>
-		</div>
+				</div>
+				<a href="#join" class="hero-cta">Commencer <i class="fas fa-arrow-down"></i></a>
+			</div>
+		</section>
+
+		<!-- SECTION FORMULAIRE -->
+		<section id="join" class="join-section">
+			<div class="join-container">
+				<header class="join-header">
+					<h1>Rejoindre un Room</h1>
+				</header>
+				<main class="join-main">
+					<form class="control" action="chat.html">
+						<div class="form-control">
+							<label for="username">Nom utilisateur</label>
+							<input
+								type="text"
+								name="username"
+								id="username"
+								placeholder="Votre nom"
+								required
+							/>
+						</div>
+						<div class="form-control">
+							<label for="room">Room</label>
+							<input
+								type="text"
+								name="room"
+								id="room"
+								placeholder="Ex: général, gaming, travail..."
+								required
+							/>
+						</div>
+						<button type="submit" class="bouton">Joindre</button>
+						<div class="zen">
+							<p class="modeZen">Passer en mode Zen</p>
+							<button type="button" class="toggle-button">
+							<i class="fas fa-moon"></i>
+						</button>
+						</div>
+					</form>
+				</main>
+			</div>
+		</section>
+
 		<script src="./js/script.js"></script>
 	</body>
 </html>
