@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
@@ -14,48 +14,69 @@
   </head>
   <body>
     <div class="chat-container">
+
+      <!-- HEADER -->
       <header class="chat-header">
-        <h1> ChatZone</h1>
-        <button type="button" class="toggle-button">
-          <i class="fas fa-sun"></i>
+        <!-- Hamburger (mobile uniquement) -->
+        <button type="button" class="sidebar-toggle" id="sidebar-toggle" aria-label="Membres">
+          <i class="fas fa-users"></i>
         </button>
-        <a href="index.html" class="btn1">Quitter</a>
+        <h1>💬 ChatZone</h1>
+        <button type="button" class="toggle-button" aria-label="Thème">
+          <i class="fas fa-moon"></i>
+        </button>
+        <a href="index.html" class="btn-leave">Quitter</a>
       </header>
+
       <main class="chat-main">
-        <div class="chat-sidebar">
-          <h3><i class="fas fa-comments"></i> Room:</h3>
+
+        <!-- OVERLAY backdrop (mobile) -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <!-- SIDEBAR -->
+        <div class="chat-sidebar" id="chat-sidebar">
+          <h3><i class="fas fa-comments"></i> Room</h3>
           <h2 id="room-name"></h2>
           <h3><i class="fas fa-users"></i> Membres</h3>
-          <ul id="users">
-          </ul>
+          <ul id="users"></ul>
         </div>
+
+        <!-- MESSAGES -->
         <div class="chat-messages"></div>
+
       </main>
+
+      <!-- FORMULAIRE -->
       <div class="chat-form-container">
         <form id="chat-form">
+          <!-- Input file caché -->
           <input type="file" id="file-input" accept="image/*,video/*,.pdf,.doc,.docx" style="display:none" />
-          <button type="button" id="file-btn" class="btn-file" title="Envoyer un fichier">
+          <!-- Bouton fichier -->
+          <button type="button" id="file-btn" class="btn-action" title="Envoyer un fichier" aria-label="Fichier">
             <i class="fas fa-paperclip"></i>
           </button>
-          <button type="button" id="mic-btn" class="btn-mic" title="Enregistrer un audio">
+          <!-- Bouton micro -->
+          <button type="button" id="mic-btn" class="btn-action btn-mic" title="Enregistrer un audio" aria-label="Audio">
             <i class="fas fa-microphone"></i>
           </button>
-          <input
-            id="msg"
-            type="text"
-            placeholder="Message"
-            required
-            autocomplete="off"
-          />
-          <button class="btn2"><i class="fas fa-paper-plane"></i> Envoyer</button>
+          <!-- Texte -->
+          <input id="msg" type="text" placeholder="Message…" required autocomplete="off" />
+          <!-- Envoyer -->
+          <button type="submit" class="btn-send">
+            <i class="fas fa-paper-plane"></i>
+            <span>Envoyer</span>
+          </button>
         </form>
       </div>
-    </div>
+
+    </div><!-- /.chat-container -->
+
     <audio id="notification-sound" preload="auto">
       <source src="./audio/ding-idea-40142.mp3" type="audio/mpeg">
     </audio>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
       integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
       crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
