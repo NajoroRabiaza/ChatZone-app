@@ -179,3 +179,19 @@ function escapeHtml(str) {
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;');
 }
+
+/* ════════════════════════
+   RECONNEXION AUTOMATIQUE
+════════════════════════ */
+
+// Quand Socket.io se reconnecte (ex: retour sur l'onglet, réseau rétabli)
+socket.on('reconnect', () => {
+    socket.emit('joinRoom', { username, room });
+});
+
+// Page Visibility API : détecte le retour sur l'onglet/app
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && !socket.connected) {
+        socket.connect();
+    }
+});
